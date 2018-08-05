@@ -53,7 +53,6 @@ public class BrandServiceImpl implements BrandService {
         }
 
     }
-
     @Override
     public PageResult search(Integer pageNum, Integer pageSize, TbBrand tbBrand) {
         PageHelper.startPage(pageNum, pageSize);
