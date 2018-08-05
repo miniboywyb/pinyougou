@@ -14,90 +14,10 @@
     <script src="../plugins/angularjs/angular.min.js"></script>
     <script src="../plugins/angularjs/pagination.js"></script>
     <link rel="stylesheet" href="../plugins/angularjs/pagination.css"/>
-    <script>
-        var app = angular.module('pinyougou', ['pagination']);
-        app.controller('brandController', function ($scope, $http) {
-            $scope.findAll = function () {
-                $http.get('../brand/findAll').success(function (response) {
-                    $scope.list = response;
-                })
-            }
-
-            $scope.paginationConf = {
-                currentPage: 1,
-                totalItems: 10,
-                itemsPerPage: 10,
-                perPageOptions: [10, 20, 30, 40, 50],
-                onChange: function () {
-                    $scope.reloadList();
-                }
-            }
-
-            $scope.findPage = function (pageNum, pageSize) {
-                $http.get('../brand/findPage?pageNum=' + pageNum + '&pageSize=' + pageSize).success(function (response) {
-                    $scope.list = response.rows;
-                    $scope.paginationConf.totalItems = response.total;
-                })
-            }
-
-            $scope.reloadList = function () {
-                $scope.search($scope.paginationConf.currentPage,
-                    $scope.paginationConf.itemsPerPage);
-            }
-
-            $scope.save = function () {
-                var objectName = "";
-                if ($scope.entity.id != null) {
-                    objectName = $http.post('../brand/update', $scope.entity);
-                } else {
-                    objectName = $http.post('../brand/add', $scope.entity);
-                }
-
-                objectName.success(function (response) {
-                    if (response.success) {
-                        $scope.reloadList();
-                    } else {
-                        alert(response.message);
-                    }
-                })
-            }
-            $scope.findOne = function (id) {
-                $http.get('../brand/findOne?id=' + id).success(function (response) {
-                    $scope.entity = response;
-                })
-            }
-
-            $scope.selectId = [];
-
-            $scope.updateSelection = function ($event, id) {
-                if ($event.target.checked) {
-                    $scope.selectId.push(id);
-                } else {
-                    var index = $scope.selectId.indexOf(id);
-                    $scope.selectId.splice(index, 1);
-                }
-            }
-
-            $scope.dele = function () {
-                $http.get('../brand/dele?ids=' + $scope.selectId).success(function (response) {
-                    if (response.success) {
-                        $scope.reloadList();
-                        $scope.selectId = [];
-                    } else {
-                        alert(response.message);
-                    }
-                })
-            }
-            $scope.searchEntity = {};
-            $scope.search=function (pageNum,pageSize) {
-                $http.post("../brand/search?pageNum="+pageNum+"&pageSize="+pageSize,$scope.searchEntity).success(
-                    function (response) {
-                    $scope.list=response.rows;
-                    $scope.paginationConf.totalItems=response.total;
-                });
-            }
-        })
-    </script>
+    <script src="../js/base_pagination.js"></script>
+    <script src="../js/service/brandService.js"></script>
+    <script src="../js/controller/baseController.js"></script>
+    <script src="../js/controller/brandController.js"></script>
 
 
 </head>
