@@ -25,8 +25,8 @@ public class BrandServiceImpl implements BrandService {
     @Override
     public PageResult findPage(int pageNum, int PageSize) {
         PageHelper.startPage(pageNum, PageSize);
-        Page<TbBrand> page =(Page<TbBrand>) brandMapper.findAll();
-        return new PageResult(page.getTotal(),page.getResult());
+        Page<TbBrand> page = (Page<TbBrand>) brandMapper.findAll();
+        return new PageResult(page.getTotal(), page.getResult());
     }
 
     @Override
@@ -46,17 +46,18 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void dele(Long[] ids) {
-        if(ids!=null&&ids.length>0){
+        if (ids != null && ids.length > 0) {
             for (Long id : ids) {
                 brandMapper.dele(id);
             }
         }
 
     }
+
     @Override
     public PageResult search(Integer pageNum, Integer pageSize, TbBrand tbBrand) {
         PageHelper.startPage(pageNum, pageSize);
-        Page<TbBrand> page =(Page<TbBrand>) brandMapper.search(tbBrand);
-        return new PageResult(page.getTotal(),page.getResult());
+        Page<TbBrand> page = (Page<TbBrand>) brandMapper.search(tbBrand);
+        return new PageResult(page.getTotal(), page.getResult());
     }
 }
