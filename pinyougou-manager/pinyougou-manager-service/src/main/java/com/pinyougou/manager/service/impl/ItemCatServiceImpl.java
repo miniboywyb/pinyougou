@@ -73,10 +73,40 @@ public class ItemCatServiceImpl implements ItemCatService {
      * 批量删除
      */
     @Override
-    public void delete(Long[] ids) {
-        for (Long id : ids) {
-            itemCatMapper.deleteByPrimaryKey(id);
+    public String delete(Long[] ids, Integer ifSearch) {
+        String message = "";
+        if (ifSearch == 1) {
+            for (Long id : ids) {
+                TbItemCatExample example = new TbItemCatExample();
+                example.createCriteria().andParentIdEqualTo(id);
+                List<TbItemCat> itemCats = itemCatMapper.selectByExample(example);
+                if (itemCats.size() > 0) {
+                    TbItemCat itemCat = itemCatMapper.selectByPrimaryKey(id);
+                    message += itemCat.getName();
+                    message += ",";
+                } else {
+                    itemCatMapper.deleteByPrimaryKey(id);
+                }
+            }
+        } else {
+            for (Long id : ids) {
+                deleteAll(id);
+            }
         }
+        return message;
+    }
+
+    public void deleteAll(Long id) {
+        TbItemCatExample example = new TbItemCatExample();
+        example.createCriteria().andParentIdEqualTo(id);
+        List<TbItemCat> itemCats = itemCatMapper.selectByExample(example);
+        if (itemCats.size() > 0) {
+            for (TbItemCat itemCat : itemCats) {
+                deleteAll(itemCat.getId());
+            }
+        }
+        itemCatMapper.deleteByPrimaryKey(id);
+
     }
 
     @Override

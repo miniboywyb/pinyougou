@@ -22,8 +22,8 @@ app.service('itemCatService', function ($http) {
         return $http.post('../itemCat/update', entity);
     }
     //删除
-    this.dele = function (ids) {
-        return $http.get('../itemCat/delete?ids=' + ids);
+    this.dele = function (ifSearch, ids) {
+        return $http.get('../itemCat/delete?ids=' + ids + '&ifSearch=' + ifSearch);
     }
     //搜索
     this.search = function (page, rows, searchEntity) {

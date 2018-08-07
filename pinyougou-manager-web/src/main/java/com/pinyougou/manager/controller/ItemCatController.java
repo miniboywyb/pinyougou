@@ -95,10 +95,10 @@ public class ItemCatController {
      * @return
      */
     @RequestMapping("/delete")
-    public Result delete(Long[] ids) {
+    public Result delete(Long[] ids, Integer ifSearch) {
         try {
-            itemCatService.delete(ids);
-            return new Result(true, "删除成功");
+            String msg = itemCatService.delete(ids, ifSearch);
+            return new Result(true, msg);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, "删除失败");

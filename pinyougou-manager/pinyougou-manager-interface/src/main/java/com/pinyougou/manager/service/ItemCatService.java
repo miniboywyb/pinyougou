@@ -49,7 +49,7 @@ public interface ItemCatService {
      *
      * @param ids
      */
-    public void delete(Long[] ids);
+    public String delete(Long[] ids, Integer ifSearch);
 
     /**
      * 分页
