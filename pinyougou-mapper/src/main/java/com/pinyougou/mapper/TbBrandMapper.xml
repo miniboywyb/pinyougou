@@ -38,6 +38,8 @@
             </if>
         </where>
     </select>
-
+    <select id="findBrandList" resultType="map">
+        select id,name text from tb_brand;
+    </select>
 
 </mapper>

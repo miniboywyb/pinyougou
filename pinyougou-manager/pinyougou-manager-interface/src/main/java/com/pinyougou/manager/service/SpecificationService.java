@@ -4,6 +4,9 @@ import com.pinyougou.common.PageResult;
 import com.pinyougou.pojo.SpecificationVo;
 import com.pinyougou.pojo.TbSpecification;
 
+import java.util.List;
+import java.util.Map;
+
 public interface SpecificationService {
     PageResult search(Integer pageNum, Integer pageSize, TbSpecification tbSpecification);
 
@@ -14,4 +17,6 @@ public interface SpecificationService {
     void update(SpecificationVo specificationVo);
 
     void dele(Long[] ids);
+
+    List<Map> findSpecList();
 }

@@ -10,6 +10,7 @@ import com.pinyougou.pojo.TbBrand;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class BrandServiceImpl implements BrandService {
@@ -59,5 +60,10 @@ public class BrandServiceImpl implements BrandService {
         PageHelper.startPage(pageNum, pageSize);
         Page<TbBrand> page = (Page<TbBrand>) brandMapper.search(tbBrand);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    @Override
+    public List<Map> findBrandList() {
+        return brandMapper.findBrandList();
     }
 }

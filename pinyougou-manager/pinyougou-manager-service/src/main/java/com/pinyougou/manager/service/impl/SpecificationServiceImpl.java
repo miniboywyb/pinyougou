@@ -11,6 +11,7 @@ import com.pinyougou.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SpecificationServiceImpl implements SpecificationService {
@@ -80,5 +81,10 @@ public class SpecificationServiceImpl implements SpecificationService {
             specificationMapper.deleteByPrimaryKey(id);
         }
 
+    }
+
+    @Override
+    public List<Map> findSpecList() {
+        return specificationMapper.findSpecList();
     }
 }

@@ -1,10 +1,10 @@
 package com.pinyougou.mapper;
 
-import com.github.pagehelper.Page;
 import com.pinyougou.pojo.TbBrand;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 public interface TbBrandMapper {
 
@@ -20,4 +20,6 @@ public interface TbBrandMapper {
     void dele(Long id);
 
     List<TbBrand> search(TbBrand tbBrand);
+
+    List<Map> findBrandList();
 }
